@@ -1,24 +1,21 @@
 require("dotenv").config();
 
 const knex = require("knex")({
-    client: "mssql",
+    client: "pg",
     connection: {
-        server: process.env.DB_SERVER,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
-        options: {
-            encrypt: true, // Use true if you're on Azure
-            enableArithAbort: true
-        }
+        host: process.env.PGHOST,
+        user: process.env.PGUSER,
+        password: process.env.PGPASSWORD,
+        database: process.env.PGDATABASE,
+        port: Number(process.env.PGPORT),
+        ssl: { rejectUnauthorized: false }
     },
     pool: {
         min: 2,
-        max: 10
+        max: 5
     },
-    acquireConnectionTimeout: 10000, 
+    acquireConnectionTimeout: 10000
 })
   
 module.exports = knex;
-
 

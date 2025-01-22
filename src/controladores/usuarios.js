@@ -46,23 +46,27 @@ const login = async (req, res) => {
   }
 
   try {
-    const usuario = await knex("usuarios").where({ email }).first();
+    const buscarConta = await knex("conta_bancaria").where({ email }).first();
 
-    if (!usuario) {
-      return res.status(404).json({ msg: "email ou senha invalido" });
+    
+    if (!buscarConta) {
+      return res.status(400).json({ mensagem: "email ou senha invalido" });
     }
 
-    const senhaValida = await bcript.compare(senha, usuario.senha);
+    const senhaValida = await bcript.compare(senha, buscarConta.senha);
+
+    console.log(senha, buscarConta.senha);
+
 
     if (!senhaValida) {
-      return res.status(400).json({ msg: "email ou senha invalido" });
+      return res.status(400).json({ mensagem: "email ou senha invalido" });
     }
 
-    const token = jwt.sign({ id: usuario.id }, senhaSecreta, {
+    const token = jwt.sign({ id: buscarConta.id }, senhaSecreta, {
       expiresIn: "8h",
     });
 
-    const { senha: _, ...usuarioLogado } = usuario;
+    const { senha: senhaUsuario, ...usuarioLogado } = buscarConta;
     return res.status(200).json({ usuario: usuarioLogado, token });
   } catch (erro) {
     console.log(erro.message);

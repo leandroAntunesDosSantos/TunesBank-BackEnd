@@ -14,13 +14,12 @@ const verificarUsuarioLogado = async (req, res, next) => {
   try {
     const { id } = jwt.verify(token, senhaSecreta);
 
-    const usuario = await knex("usuarios").where({ id }).first();
+    const conta = await knex("conta_bancaria").where({ id }).first();
 
-    if (!usuario) {
+    if (!conta) {
       return res.status(401).json({ msg: "não autorizado" });
     }
-
-    req.usuario = usuario;
+    req.usuario = conta;
     next();
   } catch (error) {
     return res.status(401).json({ msg: "não autorizado" });
