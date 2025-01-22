@@ -1,10 +1,3 @@
-// table.increments('id').primary();
-// table.string('agencia').notNullable();
-// table.string('conta').notNullable();
-// table.integer('usuario_id').unsigned().notNullable();
-// table.foreign('usuario_id').references('usuarios.id');
-// table.decimal('saldo', 14, 2).notNullable().defaultTo(0);
-// table.timestamp('data_criacao').defaultTo(knex.fn.now());
 const knex = require('../conexao');
 const bcrypt = require('bcrypt');
 

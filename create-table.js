@@ -76,9 +76,35 @@ async function createTableContaBancaria() {
     } finally {
       knex.destroy();
     }
-  } 
+} 
+
+async function createTableTransferirDinheiro(){
+    try {
+        const transferirDinheiro = await knex.schema.hasTable('transferirDinheiro');
+        if (transferirDinheiro) {
+        console.log('Tabela "transferirDinheiro" já existe');
+        return;
+        }
+    
+        await knex.schema.createTable('transferirDinheiro', (table) => {
+        table.increments('id').primary();
+        table.integer('contaOrigem_conta').unsigned().notNullable();
+        table.foreign('contaOrigem_conta').references('conta_bancaria.conta');
+        table.integer('contaDestino_conta').unsigned().notNullable();
+        table.foreign('contaDestino_conta').references('conta_bancaria.conta');
+        table.decimal('valor', 14, 2).notNullable();
+        table.timestamp('data').defaultTo(knex.fn.now());
+        });
+        console.log('Tabela "transferirDinheiro" criada com sucesso!');
+    } catch (error) {
+        console.log(error.message);
+    } finally {
+        knex.destroy();
+    }
+}
 
 
 createDatabase()
 createTableContaBancaria()
 createTableDepositos()
+createTableTransferirDinheiro()

@@ -2,6 +2,7 @@ const express = require("express");
 const verificarUsuarioLogado = require("./intermediarios/autenticacao");
 const { criarContaBancaria } = require("./controladores/ContaBancaria");
 const { depositarDinheiro } = require("./controladores/Depositos");
+const { transferirDinheiro } = require("./controladores/tranferencia");
 
 const {
   cadastrarUsuario,
@@ -21,6 +22,7 @@ rotas.post("/login", login);
 rotas.use(verificarUsuarioLogado);
 
 rotas.post("/depositar", depositarDinheiro);
+rotas.post("/transferir", transferirDinheiro);
 
 
 rotas.get("/usuario", detalharPerfilUsuario);
