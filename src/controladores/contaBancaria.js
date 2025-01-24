@@ -124,4 +124,19 @@ const transferirDinheiro = async (req, res) => {
     }
 };
 
-module.exports = { criarContaBancaria, depositarDinheiro, transferirDinheiro };
+const consultarExtrato = async (req, res) => {
+    const { conta } = req.usuario;
+
+    try {
+        const depositos = await knex('depositos').where({ contaDeposito_conta: conta }).select('*');
+        const transferenciasEnviadas = await knex('transferirDinheiro').where({ contaOrigem_conta: conta }).select('*');
+        const transferenciasRecebidas = await knex('transferirDinheiro').where({ contaDestino_conta: conta }).select('*');
+
+        return res.status(200).json({ depositos, transferenciasEnviadas, transferenciasRecebidas });
+    } catch (error) {
+        return res.status(400).json({ mensagem: error.message });
+    }
+}
+
+
+module.exports = { criarContaBancaria, depositarDinheiro, transferirDinheiro, consultarExtrato };

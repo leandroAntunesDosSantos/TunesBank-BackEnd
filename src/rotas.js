@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { buscarInformacoesUsuario } = require("./controladores/usuario");
-const { criarContaBancaria, depositarDinheiro, transferirDinheiro } = require("./controladores/ContaBancaria");
+const { criarContaBancaria, depositarDinheiro, transferirDinheiro, consultarExtrato } = require("./controladores/ContaBancaria");
 const { login } = require("./controladores/login");
 
 const verificarUsuarioLogado = require("./intermediarios/autenticacao");
@@ -16,6 +16,7 @@ rotas.use(verificarUsuarioLogado);
 rotas.get("/conta", buscarInformacoesUsuario);
 rotas.post("/depositar", depositarDinheiro);
 rotas.post("/transferir", transferirDinheiro);
+rotas.get("/extrato", consultarExtrato);
 
 module.exports = rotas;
 
