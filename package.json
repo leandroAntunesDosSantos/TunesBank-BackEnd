@@ -7,7 +7,7 @@
     "createtable": "node create-table.js",
     "dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
