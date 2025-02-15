@@ -10,7 +10,9 @@ app.use(cors());
 app.use(express.json());
 app.use(rotas);
 
-app.listen(PORT, () => {
-  console.log(`O servidor está rodando na porta ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`O servidor está rodando na porta ${PORT}`);
+// });
+
+module.exports = app;
 

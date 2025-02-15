@@ -39,7 +39,7 @@ const criarContaBancaria = async (req, res) => {
         if (!novaConta) {
             return res.status(400).json({ mensagem: "Não foi possível criar a conta bancária." });
         }
-        return res.status(200).json({ mensagem: "Conta bancária criada com sucesso." });
+        return res.status(201).json({ mensagem: "Conta bancária criada com sucesso." });
     } catch (error) {
         return res.status(400).json({ mensagem: error.message });
     }
