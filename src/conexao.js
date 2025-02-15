@@ -11,8 +11,8 @@ const knex = require("knex")({
         ssl: { rejectUnauthorized: false }
     },
     pool: {
-        min: 2,
-        max: 5
+        min: 5,
+        max: 10
     },
     acquireConnectionTimeout: 10000
 })
