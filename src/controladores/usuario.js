@@ -12,7 +12,7 @@ const buscarInformacoesUsuario = async (req, res) => {
         const { id, senha, ...dadosUsuario } = usuario;
         return res.status(200).json(dadosUsuario);
     } catch (error) {
-        return res.status(400).json({ mensagem: error.message });
+        return res.status(500).json({ mensagem: error.message });
     }
 }
 
