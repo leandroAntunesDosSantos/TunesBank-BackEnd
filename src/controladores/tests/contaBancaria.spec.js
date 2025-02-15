@@ -86,5 +86,4 @@ describe('conta bancaria', () => {
         expect(response.status).toHaveBeenCalledWith(400);
         expect(response.json).toHaveBeenCalledWith({ mensagem: 'Preencha os campos obrigatórios: nome, email e senha.' });
     });
- 
 });
