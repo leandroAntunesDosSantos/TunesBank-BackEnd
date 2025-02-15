@@ -2,7 +2,7 @@
 // IT OR TEST - DECLARA UNICO TESTE
 // EXPECT - DECLARA O QUE SE ESPERA DE UM TESTE
 
-const ContaBancaria = require('../../controladores/contaBancaria');
+const ContaBancaria = require('../../controladores/ContaBancaria');
 const knex = require('../../conexao');
 const bcrypt = require('bcrypt');
 
